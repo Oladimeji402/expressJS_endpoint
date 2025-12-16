@@ -11,8 +11,7 @@ export default function errorHandler(err, req, res, next) {
   // If headers already sent, delegate to default handler
   if (res.headersSent) return next(err);
 
-  // Handle validation errors from express-validator (they usually are handled earlier),
-  // or any custom `status` set on the error
+  // Handle validation errors from express-validator
   const status = err.status || 500;
 
   // Provide a generic message to the client
