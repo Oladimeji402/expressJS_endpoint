@@ -5,6 +5,8 @@ import rateLimit from "express-rate-limit";
 import morgan from "morgan";
 import supabase from "./config/supabase.js";
 import authRoutes from "./routes/auth.routes.js";
+import profileRoutes from "./routes/profile.routes.js";
+
 
 const app = express();
 
@@ -54,6 +56,10 @@ app.use("/api/auth", authRoutes);
 app.get("/", (req, res) => {
   res.json({ status: "API running" });
 });
+
+
+app.use("/api", profileRoutes);
+
 
 app.get("/health", async (req, res) => {
   const { data, error } = await supabase.from("profiles").select("*").limit(1);

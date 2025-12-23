@@ -19,10 +19,16 @@ export const signup = async (req, res, next) => {
       password,
     });
 
-    if (error) {
-      console.error("Supabase signUp error:", error);
-      return res.status(400).json({ error: "Unable to register user" });
-    }
+  if (error) {
+  console.error("Supabase signUp error:", error);
+
+  return res.status(400).json({
+    error: error.message,
+    code: error.code,
+    status: error.status,
+  });
+}
+
 
     const { error: profileError } = await supabaseAdmin
       .from("profiles")
